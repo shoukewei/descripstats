@@ -1,4 +1,4 @@
-# normscaler
+# descripstats
 
 This is a small package to help add more descriptive statistics to the default `describe()` of Pandas, which include:
     - mad: mean absolute deviation
