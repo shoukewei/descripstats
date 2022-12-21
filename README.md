@@ -1,12 +1,12 @@
 # descripstats
 
-This is a small package to help add more descriptive statistics to the default `describe()` of Pandas, which include:
-    - mad: mean absolute deviation
-    - variance: variance
-    - sem: standard error of the mean
-    - sum: sum
-    - skewness: skewness
-    - kurtosis: kurtosis
+This is a small package to help add more descriptive statistics to the default `describe()` of Pandas, which include:   
+- mad: mean absolute deviation
+- variance: variance
+- sem: standard error of the mean
+- sum: sum
+- skewness: skewness
+- kurtosis: kurtosis
 
 Developed by Shouke Wei from Deepsim Academy, Deepsim Intelligence Technology Inc. (c) 2022
 
