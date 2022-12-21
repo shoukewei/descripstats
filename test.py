@@ -6,4 +6,4 @@ url = 'https://raw.githubusercontent.com/Sid-149/Life-Expectancy-Predictor-Compa
 df = pd.read_csv(url,index_col=False)
 
 # display the descriptive statistic mesures in Pandas DataFrame
-ds.Describe(df)
+print(ds.Describe(df))

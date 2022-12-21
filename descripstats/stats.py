@@ -25,7 +25,7 @@ def Describe(data):
     data = pd.DataFrame(data)
     describe = data.describe()
     #median = data.median(skipna=True,numeric_only=True,)# it is 50%
-    mad = data.mad(skipna=True,numeric_only=True) # mean absolute deviation
+    mad = data.mad(skipna=True) # mean absolute deviation
     var = data.var(skipna=True,numeric_only=True)
     sem = data.sem(numeric_only=True, skipna=True) #standard error of the mean
     sum = data.sum(numeric_only=True, skipna=True)
