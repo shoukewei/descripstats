@@ -1,9 +1,11 @@
 import pandas as pd
 import descripstats as ds
 
-# read data
-url = 'https://raw.githubusercontent.com/Sid-149/Life-Expectancy-Predictor-Comparative-Analysis/main/Notebooks/Life%20Expectancy%20Data.csv'
-df = pd.read_csv(url,index_col=False)
+# example local DataFrame (stable example for tests and CI)
+df = pd.DataFrame({
+	"A": [1, 2, 3, 4, 5],
+	"B": [10, 20, 30, 40, 50]
+})
 
-# display the descriptive statistic mesures in Pandas DataFrame
+# display the descriptive statistic measures in Pandas DataFrame
 print(ds.Describe(df))

@@ -1,46 +1,45 @@
 
 import pandas as pd
+import numpy as np
 
 def Describe(data):
-
     """
-    Add more descriptive to default describe() of Pandas:
+    Enhanced pandas describe() with additional statistics:
     - mad: mean absolute deviation
-    - variance: variance
+    - variance
     - sem: standard error of the mean
-    - sum: sum
-    - skewness: skewness
-    - kurtosis: kurtosis
-
-    Constructor method.
-        Parameters
-        ----------
-        data: data in NumPy array or Panadas DataFrame
-    
-        Return
-        ---------- 
-        stats: the descriptive statistics
+    - sum
+    - skewness
+    - kurtosis
     """
-    
+
     data = pd.DataFrame(data)
+
     describe = data.describe()
-    #median = data.median(skipna=True,numeric_only=True,)# it is 50%
-    mad = data.mad(skipna=True) # mean absolute deviation
-    var = data.var(skipna=True,numeric_only=True)
-    sem = data.sem(numeric_only=True, skipna=True) #standard error of the mean
-    sum = data.sum(numeric_only=True, skipna=True)
-    skew = data.skew(skipna=True,numeric_only=True)
-    kurt = data.kurt(skipna=True,numeric_only=True)
-    
-    # display in pandas dataframe and transpose it
-    #median = pd.DataFrame({'median':median}).T
-    mad_df = pd.DataFrame({'mad':mad}).T
-    var_df = pd.DataFrame({'variance':var}).T
-    sem_df = pd.DataFrame({'sem':sem}).T
-    sum_df = pd.DataFrame({'sum':sum}).T
-    skew_df = pd.DataFrame({'skewness':skew}).T
-    kurt_df = pd.DataFrame({'kurtosis':kurt}).T
-    
-    stats = pd.concat([describe[0:2],mad_df,var_df,sem_df,describe[2:],sum_df,skew_df,kurt_df])
-                             
+
+    # numeric-only columns
+    num = data.select_dtypes(include="number")
+
+    # --- FIX: pandas 2.x compatible MAD ---
+    mad = num.apply(lambda x: np.mean(np.abs(x - x.mean())))
+
+    var = num.var()
+    sem = num.sem()
+    sum_ = num.sum()
+    skew = num.skew()
+    kurt = num.kurt()
+
+    # build DataFrames
+    mad_df = pd.DataFrame([mad], index=["mad"])
+    var_df = pd.DataFrame([var], index=["variance"])
+    sem_df = pd.DataFrame([sem], index=["sem"])
+    sum_df = pd.DataFrame([sum_], index=["sum"])
+    skew_df = pd.DataFrame([skew], index=["skewness"])
+    kurt_df = pd.DataFrame([kurt], index=["kurtosis"])
+
+    # combine
+    stats = pd.concat(
+        [describe, mad_df, var_df, sem_df, sum_df, skew_df, kurt_df]
+    )
+
     return stats
